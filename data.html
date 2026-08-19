@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Monaco4D Dataset: Multiview F1 racing dataset">
+  <meta name="keywords" content="Dynamic 3D Dataset, Immersive Sports, F1 Racing, Gaussian Splatting">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Monaco4D Dataset</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LST90RCZZM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-LST90RCZZM');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- <script defer src="./static/js/fontawesome.all.min.js"></script> -->
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+
+  <style>
+    .container {
+      margin: 0 auto;
+    }
+
+    .dataset-stats {
+      background-color: var(--bg-elevated);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      border-radius: 8px;
+      margin: 2rem 0;
+    }
+
+    .stat-box {
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: var(--text);
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      color: var(--text-muted);
+    }
+
+    .stat-box-estimated .stat-number {
+      font-size: 2rem;
+      color: var(--text-body);
+    }
+    .stat-subnote {
+      font-size: 0.76rem;
+      color: var(--text-faint);
+      margin-top: 0.4rem;
+    }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+
+          <h1 class="title is-1 publication-title">Monaco4D Dataset</h1>
+
+          <div class="is-size-4 publication-authors">
+            <span class="author-block">Outdoor, exocentric, streaming 4D benchmark</span>
+          </div>
+
+          <br/>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- Home Link. -->
+              <span class="link-block">
+                <a href="index.html"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-home"></i>
+                  </span>
+                  <span>Home</span>
+                  </a>
+                </span>
+              <!-- search. -->
+              <span class="link-block">
+                <a href="https://huggingface.co/datasets/saswat72444/Monaco4D"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-download"></i>
+                  </span>
+                  <span>Download</span>
+                </a>
+              </span>
+              <!-- License Link. -->
+              <span class="link-block">
+                <a href="static/docs/LICENSE.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fas fa-file"></i>
+                  </span>
+                  <span>License</span>
+                </a>
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top: 0;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <div class="figure-card is-white-bg">
+          <img src="./static/images/dataset.png"
+               alt="Monaco4D modalities: depth, dense scene flow, RGB, instance masks, and surface normals, across five illumination conditions, captured from trackside and drone cameras around a mapped circuit">
+        </div>
+        <p class="narrative-caption">
+          Six sections of a to-scale Monaco Grand Prix replica, rendered in Unreal Engine 5, under five
+          illumination conditions, with dense multi-modal ground truth.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <h2 class="title is-3">Comparison with prior datasets</h2>
+        <p class="content narrative-copy">No existing dataset covers the combination needed for immersive watching of F1.</p>
+
+        <div class="table-scroll">
+          <table class="capability-matrix">
+            <thead>
+              <tr><th>&nbsp;</th><th>Outdoor</th><th>Exocentric</th><th>Multi-modal GT</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Driving datasets</td>
+                <td class="mark-yes">&#10003;</td><td class="mark-no">&#10005;</td><td class="mark-yes">&#10003;</td>
+              </tr>
+              <tr>
+                <td>Indoor multi-view</td>
+                <td class="mark-no">&#10005;</td><td class="mark-yes">&#10003;</td><td class="mark-no">&#10005;</td>
+              </tr>
+              <tr>
+                <td>Sports free-viewpoint</td>
+                <td class="mark-no">&#10005;</td><td class="mark-yes">&#10003;</td><td class="mark-yes">&#10003;</td>
+              </tr>
+              <tr class="highlight-row">
+                <td>Monaco4D</td>
+                <td class="mark-yes">&#10003;</td><td class="mark-yes">&#10003;</td><td class="mark-yes">&#10003;</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- rig -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <h2 class="title is-3">Camera rig</h2>
+        <p class="content narrative-copy">The rig follows real F1 broadcast coverage rather than a generic
+          camera array.</p>
+        <div class="feature-grid">
+          <button type="button" class="feature-card feature-card-video">
+            <video muted loop playsinline preload="metadata">
+              <source src="./static/videos/dataset/rig/trackside.mp4" type="video/mp4">
+            </video>
+            <div class="feature-card-content">
+              <span class="icon is-medium"><i class="fas fa-video fa-lg"></i></span>
+              <h4>Trackside</h4>
+              <p>Fixed cameras mounted near the guardrails along the circuit.</p>
+            </div>
+          </button>
+          <button type="button" class="feature-card feature-card-video">
+            <video muted loop playsinline preload="metadata">
+              <source src="./static/videos/dataset//rig/onboard.mp4" type="video/mp4">
+            </video>
+            <div class="feature-card-content">
+              <span class="icon is-medium"><i class="fas fa-car fa-lg"></i></span>
+              <h4>Onboard</h4>
+              <p>Seven cameras per car following FIA specifications.</p>
+            </div>
+          </button>
+          <button type="button" class="feature-card feature-card-video">
+            <video muted loop playsinline preload="metadata">
+              <source src="./static/videos/dataset//rig/drone.mp4" type="video/mp4">
+            </video>
+            <div class="feature-card-content">
+              <span class="icon is-medium"><i class="fas fa-helicopter fa-lg"></i></span>
+              <h4>Drone</h4>
+              <p>Broadcast style flight patterns with subject tracking and rapid panning.</p>
+            </div>
+          </button>
+          <button type="button" class="feature-card feature-card-video">
+            <video muted loop playsinline preload="metadata">
+              <source src="./static/videos/dataset/rig/binding.mp4" type="video/mp4">
+            </video>
+            <div class="feature-card-content">
+              <span class="icon is-medium"><i class="fas fa-circle-nodes fa-lg"></i></span>
+              <h4>Binding pose</h4>
+              <p>A static ring of cameras around each zone for synchronized multi-view coverage.</p>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Illumination -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <h2 class="title is-3">Illumination conditions</h2>
+        <p class="content narrative-copy">Most photometric reconstruction methods assume illumination changes
+          slowly across a sequence. Every sequence in Monaco4D is rendered under five conditions, plus
+          in-clip transitions such as tunnels, building shade, and streetlamps, which violate that
+          assumption.</p>
+        <div class="media-switcher">
+          <video class="is-active" data-key="day" muted loop playsinline autoplay preload="auto">
+            <source src="./static/videos/dataset/illumination/day.mp4" type="video/mp4">
+          </video>
+          <video data-key="evening" muted loop playsinline preload="auto">
+            <source src="./static/videos/dataset/illumination/evening.mp4" type="video/mp4">
+          </video>
+          <video data-key="night" muted loop playsinline preload="auto">
+            <source src="./static/videos/dataset/illumination/night.mp4" type="video/mp4">
+          </video>
+          <video data-key="fog" muted loop playsinline preload="auto">
+            <source src="./static/videos/dataset/illumination/fog.mp4" type="video/mp4">
+          </video>
+          <video data-key="rain" muted loop playsinline preload="auto">
+            <source src="./static/videos/dataset/illumination/rain.mp4" type="video/mp4">
+          </video>
+          <div class="media-switcher-toolbar">
+            <button type="button" class="baseline-pill is-active" data-key="day"><i class="fas fa-sun"></i>Day</button>
+            <button type="button" class="baseline-pill" data-key="evening"><i class="fas fa-cloud-sun"></i>Evening</button>
+            <button type="button" class="baseline-pill" data-key="night"><i class="fas fa-moon"></i>Night</button>
+            <button type="button" class="baseline-pill" data-key="fog"><i class="fas fa-smog"></i>Fog</button>
+            <button type="button" class="baseline-pill" data-key="rain"><i class="fas fa-cloud-rain"></i>Rain</button>
+          </div>
+        </div>
+        <p class="content narrative-copy">That gives 30 sequence and illumination combinations, before
+          car-count variation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- gt -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <h2 class="title is-3">Ground truth annotations</h2>
+        <p class="content narrative-copy">Every frame includes path-traced RGB, surface normals, metric
+          depth, and per-instance segmentation masks.</p>
+        <div class="media-switcher">
+          <video class="is-active" data-key="rgb" muted loop playsinline autoplay preload="auto">
+            <source src="./static/videos/dataset/modalities/rgb.mp4" type="video/mp4">
+          </video>
+          <video data-key="depth" muted loop playsinline preload="auto">
+            <source src="./static/videos/dataset/modalities/depth.mp4" type="video/mp4">
+          </video>
+          <video data-key="semantic" muted loop playsinline preload="auto">
+            <source src="./static/videos/dataset/modalities/semantic.mp4" type="video/mp4">
+          </video>
+          <video data-key="normals" muted loop playsinline preload="auto">
+            <source src="./static/videos/dataset/modalities/normals.mp4" type="video/mp4">
+          </video>
+          <video data-key="sceneflow" muted loop playsinline preload="auto">
+            <source src="./static/videos/dataset/modalities/rgb.mp4" type="video/mp4">
+          </video>
+          <div class="media-switcher-toolbar">
+            <button type="button" class="baseline-pill is-active" data-key="rgb"><i class="fas fa-palette"></i>RGB</button>
+            <button type="button" class="baseline-pill" data-key="depth"><i class="fas fa-layer-group"></i>Depth</button>
+            <button type="button" class="baseline-pill" data-key="semantic"><i class="fas fa-shapes"></i>Semantic</button>
+            <button type="button" class="baseline-pill" data-key="normals"><i class="fas fa-vector-square"></i>Normals</button>
+            <button type="button" class="baseline-pill" data-key="sceneflow"><i class="fas fa-wind"></i>Scene flow</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Engine release -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <h2 class="title is-3">Engine release</h2>
+        <p class="content narrative-copy">A single fixed release cannot cover every use case, so we are also
+          releasing the data engine that renders Monaco4D, for selective data generation. 
+          No Unreal Engine experience is required to run it.</p>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <span class="icon is-medium"><i class="fas fa-table-cells fa-lg"></i></span>
+            <h4>Configurable capture matrix</h4>
+            <p>Vary circuit zone, weather, camera rig, and traffic density independently.</p>
+          </div>
+          <div class="feature-card">
+            <span class="icon is-medium"><i class="fas fa-clapperboard fa-lg"></i></span>
+            <h4>Two render modes</h4>
+            <p>Fast Deferred rendering for bulk generation, or Path Tracing for high-quality output.</p>
+          </div>
+          <div class="feature-card">
+            <span class="icon is-medium"><i class="fas fa-list-check fa-lg"></i></span>
+            <h4>Fine controls</h4>
+            <p>Adjust frame rates, resolution, motion blur, headless mode from the UI.</p>
+          </div>
+          <div class="feature-card">
+            <span class="icon is-medium"><i class="fas fa-arrows-rotate fa-lg"></i></span>
+            <h4>Deterministic by design</h4>
+            <p>Auto-exposure and motion blur are explicitly controlled, so sequences are
+              reproducible.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Statistics -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full">
+        <h2 class="title is-3 has-text-centered">Dataset Statistics</h2>
+        <div class="dataset-stats">
+          <div class="columns">
+            <div class="column stat-box">
+              <div class="stat-number">4,850</div>
+              <div class="stat-label">Hand-authored camera sequences</div>
+            </div>
+            <div class="column stat-box">
+              <div class="stat-number">30</div>
+              <div class="stat-label">Unique environments</div>
+              <div class="stat-subnote">6 zones &middot; 5 illumination</div>
+            </div>
+            <div class="column stat-box">
+              <div class="stat-number">5</div>
+              <div class="stat-label">Ground-truth modalities</div>
+              <div class="stat-subnote">Including dense 3D scene flow</div>
+            </div>
+            <div class="column stat-box stat-box-estimated">
+              <div class="stat-number">30M</div>
+              <div class="stat-label">Frames</div>
+              <div class="stat-subnote">13 zone/traffic combos with &sim;227 frames each</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop" id="download_section">
+    <div class="columns is-centered">
+      <div class="column is-full has-text-centered">
+        <a class="button is-primary is-rounded" target="_blank" rel="noopener noreferrer"
+           href="https://huggingface.co/datasets/saswat72444/Monaco4D">
+          <span class="icon"><i class="fas fa-download"></i></span>
+          <span>Go to download portal</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function () {
+    document.querySelectorAll('.feature-card-video').forEach(function (card) {
+      var video = card.querySelector('video');
+      if (!video) { return; }
+      card.addEventListener('mouseenter', function () {
+        card.classList.add('is-hovering');
+        video.currentTime = 0;
+        var p = video.play();
+        if (p && p.catch) { p.catch(function () {}); }
+      });
+      card.addEventListener('mouseleave', function () {
+        card.classList.remove('is-hovering');
+        video.pause();
+        video.currentTime = 0;
+      });
+    });
+
+    document.querySelectorAll('.media-switcher').forEach(function (switcher) {
+      var videosByKey = {};
+      switcher.querySelectorAll('video').forEach(function (v) {
+        videosByKey[v.dataset.key] = v;
+      });
+      switcher.querySelectorAll('.baseline-pill').forEach(function (pill) {
+        pill.addEventListener('click', function () {
+          if (pill.classList.contains('is-active')) { return; }
+          var next = videosByKey[pill.getAttribute('data-key')];
+          var current = switcher.querySelector('video.is-active');
+          if (!next || next === current) { return; }
+          switcher.querySelectorAll('.baseline-pill').forEach(function (p) { p.classList.remove('is-active'); });
+          pill.classList.add('is-active');
+          if (current) {
+            next.currentTime = current.currentTime;
+            current.pause();
+            current.classList.remove('is-active');
+          }
+          next.classList.add('is-active');
+          var p = next.play();
+          if (p && p.catch) { p.catch(function () {}); }
+        });
+      });
+    });
+  }());
+</script>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <p>Citation available upon publication.</p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            We thank the authors of <a
+            href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> who kindly open sourced the template of this website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

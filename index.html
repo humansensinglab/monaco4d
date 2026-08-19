@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="Racing in Volume with Flow Ensembles">
+  <meta name="keywords" content="Sports Events, Formula 1, Immersive Experiences, Gaussian Splatting, 4D Reconstruction">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Racing in Volume with Flow Ensembles</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-LST90RCZZM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-LST90RCZZM');
+  </script>
+
+  <!-- Open Graph -->
+  <meta property="og:url" content="https://humansensinglab.github.io/monaco4d/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Racing in Volume with Flow Ensembles">
+  <meta property="og:description" content="Racing in Volume with Flow Ensembles">
+  <meta property="og:image" content="">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:domain" content="humansensinglab.github.io">
+  <meta property="twitter:url" content="https://humansensinglab.github.io/monaco4d/">
+  <meta name="twitter:title" content="Racing in Volume with Flow Ensembles">
+  <meta name="twitter:description" content="Racing in Volume with Flow Ensembles">
+  <meta name="twitter:image" content="">
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+
+
+</head>
+<body>
+
+<!-- hero -->
+<div class="hero-video-zone" id="heroZone">
+  <div class="hero-sticky" id="heroSticky">
+
+    <video class="hero-bg-video" autoplay muted loop playsinline>
+      <source src="./static/videos/teaser_hero.mp4" type="video/mp4">
+    </video>
+
+    <div class="hero-gradient" id="heroGradient"></div>
+    <div class="hero-text-wrapper">
+      <div class="hero-content" id="heroContent">
+
+        <h1 class="hero-paper-title">
+          Racing in Volume with Flow Ensembles
+        </h1>
+
+        <p class="hero-tldr">
+          Fast 4D reconstruction for large displacement
+        </p>
+
+        <p class="hero-authors-block">
+          <a href="https://saswat0.github.io/">Saswat Subhajyoti Mallick</a>,
+          <a href="https://riuch.github.io/my-profile/">Riu Cherdchusakulchai</a>,
+          <a href="https://marcruizolle.com/">Marc Ruiz Olle</a>,<br>
+          <a href="https://www.albertmosellamontoro.com/">Albert Mosella-Montoro</a>,
+          <a href="https://scholar.google.com/citations?user=PECAagsAAAAJ&hl=pt-PT">Jose Ribeiro-Gomes</a>,
+          <a href="https://scholar.google.com/citations?user=3elKp9wAAAAJ&hl=en">Francisco Vicente Carrasco</a>,<br>
+          <a href="https://www.cs.cmu.edu/~ftorre/">Fernando De la Torre</a>
+        </p>
+
+        <p class="hero-venue-block">
+          ECCV 2026
+        </p>
+
+        <div class="hero-logos">
+          <img src="./static/images/cmu-ri-logo.svg" alt="Carnegie Mellon University">
+          <img src="./static/images/hsl_logo.png" alt="Human Sensing Lab">
+        </div>
+
+        <div class="hero-buttons">
+          <span class="link-block">
+            <a href="static/docs/paper_lite.pdf"
+               class="external-link button is-normal is-rounded is-dark">
+              <span class="icon"><i class="fas fa-file-pdf"></i></span>
+              <span>Paper</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="https://github.com/humansensinglab/monaco4d"
+               class="external-link button is-normal is-rounded is-dark">
+              <span class="icon"><i class="fa-brands fa-github"></i></span>
+              <span>Code (Coming Soon)</span>
+            </a>
+          </span>
+          <span class="link-block">
+            <a href="data.html"
+            class="external-link button is-normal is-rounded is-dark">
+            <span class="icon"><i class="fas fa-database"></i></span>
+            <span>Data</span>
+          </a>
+        </span>
+        <span class="link-block">
+          <a href="static/docs/supplementary_lite.pdf"
+              class="external-link button is-normal is-rounded is-dark">
+            <span class="icon"><i class="fas fa-file-zipper"></i></span>
+            <span>Supplemental</span>
+          </a>
+        </span>
+        <span class="link-block">
+          <a href="#BibTeX"
+             class="button is-normal is-rounded is-dark">
+            <span class="icon"><i class="fas fa-quote-right"></i></span>
+            <span>BibTeX</span>
+          </a>
+        </span>
+        </div>
+
+      </div><!-- /hero-content -->
+    </div><!-- /hero-text-wrapper -->
+
+    <div class="hero-scroll-hint" id="heroScrollHint">
+      <svg width="18" height="10" viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="1 1 9 9 17 1"/>
+      </svg>
+      Scroll
+    </div>
+
+  </div><!-- /hero-sticky -->
+</div><!-- /hero-video-zone -->
+
+<br>
+<br>
+<br>
+
+<!-- Motivation -->
+<section class="section" style="padding-top: 1rem;">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <h2 class="title is-3">Motivation</h2>
+        <div class="content narrative-copy">
+          <p>
+            About 820 million people follow Formula 1, and almost all of them watch through a single
+            director-chosen camera feed. VR and AR make it possible to place a viewer anywhere in the scene
+            instead, in the cockpit or standing trackside, but that requires reconstructing the full dynamic
+            scene in 3D as it happens rather than after the fact. This work takes a step towards making 
+            immersive sports practical.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- prior work -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <h2 class="title is-3">Prior work and the gap</h2>
+        <div class="content narrative-copy">
+          <p>
+            Reconstructing a race the way a spectator experiences it requires three properties at once: the
+            cameras have to be outdoors, they have to be exocentric (placed around the scene apart from being
+            mounted on the subject), and the reconstruction has to run as a stream, frame by frame, rather
+            than on a complete recording. Prior work has each property on its own, but not the combination.
+          </p>
+        </div>
+
+        <div class="table-scroll">
+          <table class="capability-matrix">
+            <thead>
+              <tr><th>&nbsp;</th><th>Outdoor</th><th>Exocentric</th><th>Streaming</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Most 4D reconstruction works</td>
+                <td class="mark-no">&#10005;</td><td class="mark-yes">&#10003;</td><td class="mark-yes">&#10003;</td>
+              </tr>
+              <tr>
+                <td>Outdoor datasets (driving) </td>
+                <td class="mark-yes">&#10003;</td><td class="mark-no">&#10005;</td><td class="mark-no">&#10005;</td>
+              </tr>
+              <tr>
+                <td>Offline outdoor / sports FVV</td>
+                <td class="mark-yes">&#10003;</td><td class="mark-yes">&#10003;</td><td class="mark-no">&#10005;</td>
+              </tr>
+              <tr class="highlight-row">
+                <td>Monaco4D + FastFlowGS</td>
+                <td class="mark-yes">&#10003;</td><td class="mark-yes">&#10003;</td><td class="mark-yes">&#10003;</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="content narrative-copy gap-payoff">
+          FastFlowGS closes the method gap. Monaco4D addresses the data gap.
+        </p>
+
+        <div class="figure-card">
+          <img src="./static/images/teaser.png"
+               alt="Trackside, onboard, and drone viewpoints of the Monaco4D benchmark, reconstructed by FastFlowGS">
+        </div>
+        <p class="narrative-caption">Given multi-view video streams, FastFlowGS reconstructs geometry for high fidelity, photorealistic free-view rendering.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <h2 class="title is-3">Large pixel displacement</h2>
+        <div class="content narrative-copy">
+          <p>
+            Filmed laterally at 30&nbsp;Hz, a Formula 1 car moves 200 to 400 pixels between consecutive
+            frames. Off-the-shelf optical flow and point tracking methods are typically evaluated at
+            displacements an order of magnitude smaller than this. FastFlowGS uses these trackers as they
+            are, without modification. The difficulty is that at this scale, a large fraction of the
+            per-frame correspondences they produce become unreliable. In our experiments, every existing
+            streaming 4D reconstruction method we tested diverges at this scale within the first few frames as
+            none were built to survive displacements this large.
+          </p>
+        </div>
+        <div class="stat-callout">
+          <div class="stat-callout-item">
+            <span class="stat-callout-number">200&ndash;400px</span>
+            <span class="stat-callout-label">pixel displacement <br> per frame at 30&nbsp;Hz</span>
+          </div>
+          <div class="stat-callout-item">
+            <span class="stat-callout-number">10&times;</span>
+            <span class="stat-callout-label">larger than typical <br> tracking benchmarks</span>
+          </div>
+          <div class="stat-callout-item">
+            <span class="stat-callout-number">0</span>
+            <span class="stat-callout-label">4D methods are tested <br> for this setting</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Warm start idea -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <h2 class="title is-3">A cheap warm start, not a full refit</h2>
+        <div class="content narrative-copy">
+          <p>
+            The standard way to advance a dynamic Gaussian to the next frame is to finetune its parameters 
+            directly against the new images. That optimization is expensive, and at
+            these displacements it is also unreliable as the optimizer has to search too far from the
+            Gaussian's previous position to converge consistently, which is part of why existing methods
+            degrade or diverge under this much motion.
+          </p>
+          <p>
+            FastFlowGS instead moves each Gaussian to a rough estimate of its new position before finetuning
+            starts. That estimate is cheap to compute because it comes from tracking pixels and triangulating 
+            their motion. Because the Gaussian already starts close to where it
+            needs to end up, only a short finetuning pass is needed to correct it. Tracking pixels,
+            triangulating their motion, and combining several trackers, described next, all exist to make
+            this warm start as accurate as possible.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Scene flow without depth -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <h2 class="title is-3">Obtaining 3D scene flow from 2D correspondences</h2>
+        <div class="content narrative-copy">
+          <p>
+            We associate each dynamic Gaussian with the pixels it contributes to, in every camera view. To
+            move it from one frame to the next, those pixels are tracked forward in time by a correspondence
+            method (GMFlow, DOT, LoFTR), and the resulting 2D motion is triangulated across views into a 3D 
+            displacement that updates the Gaussian's position.
+          </p>
+        </div>
+
+        <div class="figure-card">
+          <video autoplay muted loop playsinline
+                 aria-label="Single-tracker mechanism: map Gaussians to pixels, track pixels across time, triangulate 2D motion, update Gaussian position">
+            <source src="./static/videos/method/method_part_1.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="method-steps">
+          <div class="method-step">
+            <span class="method-step-index">01</span>
+            <p>Map each Gaussian to the pixels it renders through, in every view.</p>
+          </div>
+          <div class="method-step">
+            <span class="method-step-index">02</span>
+            <p>Track those pixels forward in time.</p>
+          </div>
+          <div class="method-step">
+            <span class="method-step-index">03</span>
+            <p>Triangulate the resulting 2D motion into a 3D displacement.</p>
+          </div>
+          <div class="method-step">
+            <span class="method-step-index">04</span>
+            <p>Update the Gaussian's position by that displacement.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Fusion section -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <h2 class="title is-3">Combining multiple trackers</h2>
+        <div class="content narrative-copy">
+          <p>
+            We find that a single correspondence method is not reliable on its own. Sparse feature matching struggles 
+            on the reflective bodywork of a race car. Dense optical flow struggles near occlusion
+            boundaries, for example when one car passes another. Point trackers work well for occlusion but
+            fail in low texture areas. FastFlowGS runs several trackers in parallel and combines
+            their estimates for each Gaussian, weighting each one by how geometrically certain its
+            triangulation is and by how much it agrees with the other trackers. The combined estimate is then
+            merged with a prediction carried over from the previous frame, using a Kalman-style update. The
+            result is the warm start for that Gaussian, so the finetuning pass that follows only has to correct
+            minor errors left.
+          </p>
+        </div>
+        <div class="figure-card">
+          <video autoplay muted loop playsinline
+                 aria-label="Per-tracker 3D estimates for one Gaussian, combined by triangulation certainty and cross-tracker agreement">
+            <source src="./static/videos/method/method_part_2.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="narrative-caption">Per-tracker 3D estimates for each Gaussian, combined by triangulation
+          certainty and cross-tracker agreement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Results -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <h2 class="title is-3">Results</h2>
+
+        <div class="results-grid">
+          <div class="result-card">
+            <h4>CMU-Panoptic (indoor)</h4>
+            <p>FastFlowGS leads every baseline on every metric, and holds temporal drift near zero, where
+              baselines lose more than 1&nbsp;dB per sequence.</p>
+            <p class="result-stat">+12.6% VMAF <span>at 35% greater efficiency</span></p>
+          </div>
+
+          <div class="result-card">
+            <h4>Monaco4D (outdoor)</h4>
+            <p>Every streaming baseline loses most of its Gaussians by frame 2 unless hand-tuned per sequence. FastFlowGS is the only method that produces a coherent
+              reconstruction.</p>
+            <p class="result-stat">+18.6% dynamic-region PSNR <span>at 28.3% lower per-frame time</span></p>
+          </div>
+        </div>
+
+        <h5 class="qual-heading">Qualitative comparison</h5>
+        <div class="compare-carousel" id="qualCompare">
+
+          <div class="compare-slide is-active">
+            <span class="qual-scene-label">Monaco4D &mdash; Fairmont</span>
+            <div class="compare-slider">
+              <div class="compare-slider-toolbar">
+                <button type="button" class="baseline-pill is-active" data-src="./static/videos/qualitative/1/dynamic_3dgs.mp4" data-label="D-3DGS">D-3DGS</button>
+                <button type="button" class="baseline-pill" data-src="./static/videos/qualitative/1/queen.mp4" data-label="QUEEN">QUEEN</button>
+                <button type="button" class="baseline-pill" data-src="./static/videos/qualitative/1/trackersplat.mp4" data-label="TrackerSplat">TrackerSplat</button>
+              </div>
+              <div class="compare-slider-panel compare-slider-before">
+                <video muted playsinline>
+                  <source src="./static/videos/qualitative/1/dynamic_3dgs.mp4" type="video/mp4">
+                </video>
+                <span class="compare-slider-tag baseline-tag-label">D-3DGS</span>
+              </div>
+              <div class="compare-slider-panel compare-slider-after">
+                <video muted playsinline>
+                  <source src="./static/videos/qualitative/1/ours.mp4" type="video/mp4">
+                </video>
+                <span class="compare-slider-tag">FastFlowGS</span>
+              </div>
+              <input type="range" min="0" max="100" value="50" class="compare-slider-input"
+                     aria-label="Drag to compare a baseline and FastFlowGS on Monaco4D, scene 1">
+              <div class="compare-slider-handle"></div>
+            </div>
+          </div>
+
+          <div class="compare-slide">
+            <span class="qual-scene-label">CMU-Panoptic &mdash; sped up by 5x</span>
+            <div class="compare-slider">
+              <div class="compare-slider-toolbar">
+                <button type="button" class="baseline-pill is-active" data-src="./static/videos/qualitative/2/dynamic_3dgs.mp4" data-label="D-3DGS">D-3DGS</button>
+                <button type="button" class="baseline-pill" data-src="./static/videos/qualitative/2/hicom.mp4" data-label="HiCoM">HiCoM</button>
+                <button type="button" class="baseline-pill" data-src="./static/videos/qualitative/2/queen.mp4" data-label="QUEEN">QUEEN</button>
+                <button type="button" class="baseline-pill" data-src="./static/videos/qualitative/2/recongs.mp4" data-label="ReCon-GS">ReCon-GS</button>
+                <button type="button" class="baseline-pill" data-src="./static/videos/qualitative/2/trackersplat.mp4" data-label="TrackerSplat">TrackerSplat</button>
+              </div>
+              <div class="compare-slider-panel compare-slider-before">
+                <video muted playsinline>
+                  <source src="./static/videos/qualitative/2/dynamic_3dgs.mp4" type="video/mp4">
+                </video>
+                <span class="compare-slider-tag baseline-tag-label">D-3DGS</span>
+              </div>
+              <div class="compare-slider-panel compare-slider-after">
+                <video muted playsinline>
+                  <source src="./static/videos/qualitative/2/ours.mp4" type="video/mp4">
+                </video>
+                <span class="compare-slider-tag">FastFlowGS</span>
+              </div>
+              <input type="range" min="0" max="100" value="50" class="compare-slider-input"
+                     aria-label="Drag to compare a baseline and FastFlowGS on CMU-Panoptic">
+              <div class="compare-slider-handle"></div>
+            </div>
+          </div>
+
+          <div class="compare-slide">
+            <span class="qual-scene-label">Monaco4D &mdash; Tunnel</span>
+            <div class="compare-slider">
+              <div class="compare-slider-toolbar">
+                <button type="button" class="baseline-pill is-active" data-src="./static/videos/qualitative/3/queen.mp4" data-label="QUEEN">QUEEN</button>
+              </div>
+              <div class="compare-slider-panel compare-slider-before">
+                <video muted playsinline>
+                  <source src="./static/videos/qualitative/3/queen.mp4" type="video/mp4">
+                </video>
+                <span class="compare-slider-tag baseline-tag-label">QUEEN</span>
+              </div>
+              <div class="compare-slider-panel compare-slider-after">
+                <video muted playsinline>
+                  <source src="./static/videos/qualitative/3/ours.mp4" type="video/mp4">
+                </video>
+                <span class="compare-slider-tag">FastFlowGS</span>
+              </div>
+              <input type="range" min="0" max="100" value="50" class="compare-slider-input"
+                     aria-label="Drag to compare a baseline and FastFlowGS on Monaco4D, scene 2">
+              <div class="compare-slider-handle"></div>
+            </div>
+          </div>
+
+          <div class="compare-slide">
+            <span class="qual-scene-label">Monaco4D &mdash; Rascasse</span>
+            <div class="compare-slider">
+              <div class="compare-slider-toolbar">
+                <button type="button" class="baseline-pill is-active" data-src="./static/videos/qualitative/4/queen.mp4" data-label="QUEEN">QUEEN</button>
+                <button type="button" class="baseline-pill" data-src="./static/videos/qualitative/4/recongs.mp4" data-label="ReCon-GS">ReCon-GS</button>
+                <button type="button" class="baseline-pill" data-src="./static/videos/qualitative/4/trackersplat.mp4" data-label="TrackerSplat">TrackerSplat</button>
+              </div>
+              <div class="compare-slider-panel compare-slider-before">
+                <video muted playsinline>
+                  <source src="./static/videos/qualitative/4/queen.mp4" type="video/mp4">
+                </video>
+                <span class="compare-slider-tag baseline-tag-label">QUEEN</span>
+              </div>
+              <div class="compare-slider-panel compare-slider-after">
+                <video muted playsinline>
+                  <source src="./static/videos/qualitative/4/ours.mp4" type="video/mp4">
+                </video>
+                <span class="compare-slider-tag">FastFlowGS</span>
+              </div>
+              <input type="range" min="0" max="100" value="50" class="compare-slider-input"
+                     aria-label="Drag to compare a baseline and FastFlowGS on Monaco4D, scene 3">
+              <div class="compare-slider-handle"></div>
+            </div>
+          </div>
+
+          <div class="compare-carousel-nav">
+            <button type="button" class="compare-carousel-btn" data-dir="-1" aria-label="Previous scene">&#8249;</button>
+            <span class="compare-carousel-counter">1 / 4</span>
+            <button type="button" class="compare-carousel-btn" data-dir="1" aria-label="Next scene">&#8250;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Video -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-8">
+        <h2 class="title is-3">Prefer to watch it?</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/[PLACEHOLDER_VIDEO_ID]?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Dataset page link -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-10">
+        <div class="dataset-linkout">
+          <div class="dataset-linkout-text">
+            <h3>Monaco4D dataset</h3>
+            <p>Trackside, onboard, and drone captures across five lighting conditions, with dense scene-flow
+              ground truth. Described in full on the dataset page.</p>
+          </div>
+          <a href="data.html" class="button is-normal is-rounded is-dark dataset-linkout-button">
+            <span>View dataset</span>
+            <span class="icon"><i class="fas fa-arrow-right"></i></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- bibtex -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <p>Citation available upon publication.</p>
+  </div>
+</section>
+
+
+<!-- footer -->
+<footer class="footer" style="padding:0.75rem 1.5rem">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column">
+        <div class="content">
+          <p>
+            We thank the authors of <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>
+            who kindly open sourced the template of this website.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+window.HELP_IMPROVE_VIDEOJS = false;
+$(document).ready(function () {
+  $(".navbar-burger").click(function () {
+    $(".navbar-burger").toggleClass("is-active");
+    $(".navbar-menu").toggleClass("is-active");
+  });
+  bulmaCarousel.attach('.carousel', {
+    slidesToScroll: 1,
+    slidesToShow: 3,
+    loop: true,
+    infinite: true,
+    autoplay: false,
+  });
+  bulmaSlider.attach();
+});
+</script>
+
+<!-- Hero scroll-reveal -->
+<script>
+(function () {
+  var zone     = document.getElementById('heroZone');
+  var gradient = document.getElementById('heroGradient');
+  var content  = document.getElementById('heroContent');
+  var hint     = document.getElementById('heroScrollHint');
+
+  // Lerp targets (set by scroll) and current animated values
+  var tGrad = 0, cGrad = 0;
+  var tText = 0, cText = 0;
+  var tY    = 28, cY   = 28;
+
+  function computeTargets() {
+    var scrolled   = window.scrollY;
+    var zoneHeight = zone.offsetHeight - window.innerHeight;
+    var start    = zoneHeight * 0.15;
+    var end      = zoneHeight * 0.60;
+    var p = Math.max(0, Math.min(1, (scrolled - start) / (end - start)));
+    tGrad = p;
+    tText = p;
+    tY    = 28 * (1 - p);
+    hint.style.opacity = Math.max(0, 1 - scrolled / 60);
+  }
+
+  var LERP = 0.09; // lower = more lag/smoothness
+  function tick() {
+    cGrad += (tGrad - cGrad) * LERP;
+    cText += (tText - cText) * LERP;
+    cY    += (tY    - cY)    * LERP;
+    gradient.style.opacity   = cGrad;
+    content.style.opacity    = cText;
+    content.style.transform  = 'translateY(' + cY + 'px)';
+    requestAnimationFrame(tick);
+  }
+
+  window.addEventListener('scroll', computeTargets, { passive: true });
+  computeTargets();
+  tick();
+}());
+</script>
+
+<!-- Drag-to-compare slider + carousel navigation -->
+<script>
+(function () {
+  document.querySelectorAll('.compare-slider').forEach(function (el) {
+    var after  = el.querySelector('.compare-slider-after');
+    var handle = el.querySelector('.compare-slider-handle');
+    var input  = el.querySelector('.compare-slider-input');
+
+    function setPosition(pct) {
+      pct = Math.max(0, Math.min(100, pct));
+      after.style.clipPath = 'inset(0 0 0 ' + pct + '%)';
+      handle.style.left = pct + '%';
+    }
+
+    input.addEventListener('input', function () { setPosition(input.value); });
+    setPosition(input.value);
+  });
+
+  var sliderControllers = new WeakMap();
+
+  document.querySelectorAll('.compare-slider').forEach(function (slider) {
+    var before = slider.querySelector('.compare-slider-before video');
+    var after  = slider.querySelector('.compare-slider-after video');
+    if (!before || !after) { return; }
+
+    function playTogether() {
+      try { before.currentTime = 0; after.currentTime = 0; } catch (e) {}
+      var p1 = before.play(); if (p1 && p1.catch) { p1.catch(function () {}); }
+      var p2 = after.play();  if (p2 && p2.catch) { p2.catch(function () {}); }
+    }
+    function pauseBoth() {
+      before.pause();
+      after.pause();
+    }
+
+    before.addEventListener('ended', playTogether);
+    after.addEventListener('ended', playTogether);
+
+    sliderControllers.set(slider, { playTogether: playTogether, pauseBoth: pauseBoth });
+  });
+
+  document.querySelectorAll('.compare-carousel').forEach(function (carousel) {
+    var slides  = carousel.querySelectorAll('.compare-slide');
+    var counter = carousel.querySelector('.compare-carousel-counter');
+    var idx = 0;
+
+    function show(i) {
+      idx = (i + slides.length) % slides.length;
+      slides.forEach(function (s, k) {
+        var active = k === idx;
+        s.classList.toggle('is-active', active);
+        s.querySelectorAll('.compare-slider').forEach(function (sl) {
+          var ctrl = sliderControllers.get(sl);
+          if (!ctrl) { return; }
+          if (active) { ctrl.playTogether(); } else { ctrl.pauseBoth(); }
+        });
+      });
+      if (counter) counter.textContent = (idx + 1) + ' / ' + slides.length;
+    }
+
+    carousel.querySelectorAll('.compare-carousel-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        show(idx + parseInt(btn.getAttribute('data-dir'), 10));
+      });
+    });
+
+    show(0);
+  });
+
+  // Slides with no carousel wrapper (none currently, kept for safety) still need a kick.
+  document.querySelectorAll('.compare-slider').forEach(function (slider) {
+    if (slider.closest('.compare-slide')) { return; }
+    var ctrl = sliderControllers.get(slider);
+    if (ctrl) { ctrl.playTogether(); }
+  });
+
+  document.querySelectorAll('.compare-slider-toolbar').forEach(function (toolbar) {
+    var slider = toolbar.closest('.compare-slider');
+    if (!slider) { return; }
+    var beforeVideo  = slider.querySelector('.compare-slider-before video');
+    var beforeSource = beforeVideo.querySelector('source');
+    var beforeTag    = slider.querySelector('.compare-slider-before .baseline-tag-label');
+
+    toolbar.querySelectorAll('.baseline-pill').forEach(function (pill) {
+      pill.addEventListener('click', function () {
+        toolbar.querySelectorAll('.baseline-pill').forEach(function (p) { p.classList.remove('is-active'); });
+        pill.classList.add('is-active');
+        beforeSource.src = pill.getAttribute('data-src');
+        beforeTag.textContent = pill.getAttribute('data-label');
+
+        var ctrl = sliderControllers.get(slider);
+        beforeVideo.addEventListener('loadedmetadata', function onReady() {
+          beforeVideo.removeEventListener('loadedmetadata', onReady);
+          if (ctrl) { ctrl.playTogether(); }
+        });
+        beforeVideo.load();
+      });
+    });
+  });
+}());
+</script>
+
+</body>
+</html>
