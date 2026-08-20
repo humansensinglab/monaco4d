@@ -53,7 +53,7 @@
 <div class="hero-video-zone" id="heroZone">
   <div class="hero-sticky" id="heroSticky">
 
-    <video class="hero-bg-video" autoplay muted loop playsinline>
+    <video class="hero-bg-video" id="heroBgVideo" autoplay muted playsinline>
       <source src="./static/videos/teaser_hero.mp4" type="video/mp4">
     </video>
 
@@ -130,10 +130,8 @@
     </div><!-- /hero-text-wrapper -->
 
     <div class="hero-scroll-hint" id="heroScrollHint">
-      <svg width="18" height="10" viewBox="0 0 18 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="1 1 9 9 17 1"/>
-      </svg>
-      Scroll
+      <div class="scroll-mouse"><div class="scroll-mouse-wheel"></div></div>
+      <span>Scroll</span>
     </div>
 
   </div><!-- /hero-sticky -->
@@ -600,16 +598,71 @@ $(document).ready(function () {
   var tText = 0, cText = 0;
   var tY    = 28, cY   = 28;
 
+  var HINT_KEY = 'heroScrollHintDismissed';
+  var hintDismissed = sessionStorage.getItem(HINT_KEY) === '1';
+  if (hintDismissed) {
+    hint.style.display = 'none';
+  }
+
+  function dismissHint() {
+    if (hintDismissed) { return; }
+    hintDismissed = true;
+    sessionStorage.setItem(HINT_KEY, '1');
+    hint.style.opacity = '0';
+    setTimeout(function () { hint.style.display = 'none'; }, 300);
+  }
+
+  var videoPlayedOnce = false;
+  var revealed     = false;
+  var scrolledAway = false;
+
   function computeTargets() {
     var scrolled   = window.scrollY;
     var zoneHeight = zone.offsetHeight - window.innerHeight;
     var start    = zoneHeight * 0.15;
     var end      = zoneHeight * 0.60;
-    var p = Math.max(0, Math.min(1, (scrolled - start) / (end - start)));
-    tGrad = p;
-    tText = p;
-    tY    = 28 * (1 - p);
-    hint.style.opacity = Math.max(0, 1 - scrolled / 60);
+
+    if (!revealed) {
+      var p = Math.max(0, Math.min(1, (scrolled - start) / (end - start)));
+      if (p >= 1) { revealed = true; }
+      tGrad = p;
+      tText = p;
+      tY    = 28 * (1 - p);
+    } else {
+      if (scrolled > 40) { scrolledAway = true; }
+      if (scrolledAway && scrolled <= 4) {
+        revealed     = false;
+        scrolledAway = false;
+        tGrad = 0;
+        tText = 0;
+        tY    = 28;
+      } else {
+        tGrad = 1;
+        tText = 1;
+        tY    = 0;
+      }
+    }
+    if (scrolled > 4) { dismissHint(); }
+  }
+
+  var heroVideo = document.getElementById('heroBgVideo');
+  if (heroVideo) {
+    heroVideo.addEventListener('ended', function () {
+      if (!videoPlayedOnce) {
+        videoPlayedOnce = true;
+        if (window.scrollY <= 4) {
+          revealed = true;
+          tGrad = 1;
+          tText = 1;
+          tY    = 0;
+          zone.style.height = '130vh';
+          dismissHint();
+        }
+      }
+      heroVideo.currentTime = 0;
+      var p = heroVideo.play();
+      if (p && p.catch) { p.catch(function () {}); }
+    });
   }
 
   var LERP = 0.09; // lower = more lag/smoothness
@@ -619,6 +672,7 @@ $(document).ready(function () {
     cY    += (tY    - cY)    * LERP;
     gradient.style.opacity   = cGrad;
     content.style.opacity    = cText;
+    content.style.pointerEvents = cText > 0.05 ? 'auto' : 'none';
     content.style.transform  = 'translateY(' + cY + 'px)';
     requestAnimationFrame(tick);
   }
