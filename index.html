@@ -544,7 +544,23 @@
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <p>Citation available upon publication.</p>
+    <div style="position:relative;">
+      <button class="button is-small" onclick="navigator.clipboard.writeText(document.getElementById('bibtex-code').innerText); this.innerHTML='<span>Copied!</span>'; setTimeout(() => this.innerHTML='<span class=&quot;icon&quot;><i class=&quot;fas fa-copy&quot;></i></span><span>Copy</span>', 1500);" style="position:absolute; top:0.5rem; right:0.5rem;">
+        <span class="icon"><i class="fas fa-copy"></i></span>
+        <span>Copy</span>
+      </button>
+      <pre id="bibtex-code" style="padding-top:2.5rem;">@InProceedings{10.1007/978-3-032-37041-9_15,
+  author="Mallick, Saswat Subhajyoti and Cherdchusakulchai, Riu and Ruiz Olle, Marc and Mosella-Montoro, Albert and Ribeiro-Gomes, Jose and Carrasco, Francisco Vicente and De la Torre, Fernando",
+  editor="Favaro, Paolo and Kukelova, Zuzana and Maki, Atsuto and Rohrbach, Anna and Schindler, Konrad and Tombari, Federico",
+  title="Racing in Volume with Flow Ensembles",
+  booktitle="Computer Vision -- ECCV 2026",
+  year="2026",
+  publisher="Springer Nature Switzerland",
+  address="Cham",
+  pages="274--292",
+  isbn="978-3-032-37041-9"
+}</pre>
+    </div>
   </div>
 </section>
 
